@@ -1,0 +1,20 @@
+Currently I tested the server file by running 'python server.py' in the code folder in a Windows Powershell Terminal.
+Then, in another terminal I run the following block:
+"
+$client = New-Object System.Net.Sockets.TcpClient
+$client.Connect("127.0.0.1", 3490)
+
+$stream = $client.GetStream()
+$writer = New-Object System.IO.StreamWriter($stream)
+$reader = New-Object System.IO.StreamReader($stream)
+
+$writer.WriteLine("WorldHEllo!~ ~")
+$writer.Flush()
+
+$response = $reader.ReadLine()
+Write-Host "Server replied: [$response]"
+
+$client.Close()
+"
+
+Currently, the server only allows me to store one message at a time, but after it times out and I run a new message, it will accept the new message and reply with the encoded message. I have not yet implemented the functionality to store multiple messages, but I will work on that next.
