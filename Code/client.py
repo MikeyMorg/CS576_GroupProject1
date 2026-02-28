@@ -244,7 +244,7 @@ def main():
         # Ask if user wants to continue (optional)
         if stats["messages_sent"] > 0 and stats["messages_sent"] % 3 == 0:
             try:
-                choice = input("\n💬 Send another message? (y/n): ").strip().lower()
+                choice = input("\nSend another message? (y/n): ").strip().lower()
                 if choice not in ['y', 'yes']:
                     print("Goodbye")
                     break
@@ -267,7 +267,7 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n👋 Program terminated by user.")
+        print("\n\nProgram terminated by user.")
     except Exception as e:
-        print(f"\n❌ Fatal error: {e}")
+        print(f"\nFatal error: {e}")
         sys.exit(1)
