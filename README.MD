@@ -20,14 +20,20 @@ Implementation:
 -Client:
 
 How to Run:
--Run Server:
--Run Client:
+1. Open a terminal in the project directory and run the following command 'python server.py'
+Expected Output: "Server listening for a connection at current port 3490"
+2. Open a second terminal window and navigate to same projcet directory
+3. Run the client 'python client.py'
+4. Enter a message when promopted
+5. To exit client, type 'QUIT' or press 'Ctrl + C'
 
 Testing and Results:
--1 Normal Run Screenshot
--1 Error Handling Screenshot
+1 Normal Run Screenshot
+
+1 Error Handling Screenshot
 
 Conclusion:
+With this assignemtn we were able to fully implement a TCP client-server application utilziign Python socket programming. We have teh server waiting for client connections, listening to it, validating the inputs, and encoding the messages using ASCII shifting, and finally returning an encoded result. We were also able to have error handling for messages longer than 256 charcaters and the ensuring of only prinatable ASCII characters accepted. We have error handling methods on both the client and the server. From all of this, we have a working implementation of TCP communcation, with input validation and basic design.
 
 Source Code:
 
