@@ -55,11 +55,11 @@ def validate_message(message: str) -> tuple[bool, str]:
     if not message or message.isspace():
         return False, "Message cannot be empty."
     
-    # Check length (server will also check, but we check early)
+    # Check length of message (server does this but we do it earlier)
     if len(message) > MAX_MESSAGE_SIZE:
         return False, f"Message exceeds maximum length of {MAX_MESSAGE_SIZE} characters."
     
-    # Check for newline characters (would break protocol)
+    # Check for newline characters (we break protocol if we don't)
     if '\n' in message:
         return False, "Message cannot contain newline characters."
     
@@ -141,7 +141,7 @@ def communicate_with_server(message: str) -> tuple[bool, str]:
         client_socket.sendall((message + "\n").encode('utf-8'))
         
         # Receive the encoded response
-        # Server sends encoded message + newline
+        # Server should send the new encoded message ending with a newline
         response_buffer = b""
         
         # Read until we get a newline (server's message terminator)
@@ -155,7 +155,7 @@ def communicate_with_server(message: str) -> tuple[bool, str]:
                 
                 response_buffer += chunk
                 
-                # Prevent infinite loop if server sends too much data
+                # Infinite loop should be prevented if server were to send too much data
                 if len(response_buffer) > MAX_MESSAGE_SIZE + 10:  # Safety margin
                     return False, "Server response exceeded expected size."
                     
@@ -211,7 +211,7 @@ def main():
         
         stats["messages_sent"] += 1
         
-        # Communicate with server (with retry logic)
+        # Communicate with server but with retry logic
         attempts = 0
         success = False
         
@@ -241,7 +241,7 @@ def main():
                     print(f"Failed after {MAX_RETRY_ATTEMPTS} attempts.")
                     stats["failed_attempts"] += 1
         
-        # Ask if user wants to continue (optional)
+        # Optional: Asking user if we should proceed
         if stats["messages_sent"] > 0 and stats["messages_sent"] % 3 == 0:
             try:
                 choice = input("\nSend another message? (y/n): ").strip().lower()
