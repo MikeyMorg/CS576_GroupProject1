@@ -6,7 +6,6 @@
 
 # Import Statements
 import socket
-# import argparse //Not sure if this will be needed, may make it easier
 
 # Set constants
 PORT = 3490
@@ -37,6 +36,10 @@ def encode_message(msg: str) -> str:
         # Wrap if we're at the last printable ASCII character '~', to ' '. (Space)
         if encode == 126: 
             encoded_msg.append(chr(32))
+        elif encode == 90:
+            encoded_msg.append(chr(65))
+        elif encode == 122:
+            encoded_msg.append(chr(97))
         else:
             encoded_msg.append(chr(encode + 1))
 
